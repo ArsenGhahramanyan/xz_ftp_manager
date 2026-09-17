@@ -1,0 +1,86 @@
+/* ==========================================================================
+   xZ FTP Manager - VS Code Theme Variables
+   Maps VS Code CSS custom properties for consistent theming.
+   ========================================================================== */
+
+:root {
+  /* ---- Core Colors ---- */
+  --fm-bg:                    var(--vscode-editor-background);
+  --fm-fg:                    var(--vscode-editor-foreground);
+  --fm-bg-secondary:          var(--vscode-sideBar-background);
+  --fm-border:                var(--vscode-panel-border, var(--vscode-widget-border, rgba(128,128,128,0.35)));
+
+  /* ---- Inputs & Controls ---- */
+  --fm-input-bg:              var(--vscode-input-background);
+  --fm-input-fg:              var(--vscode-input-foreground);
+  --fm-input-border:          var(--vscode-input-border, transparent);
+  --fm-input-placeholder:     var(--vscode-input-placeholderForeground);
+  --fm-input-focus-border:    var(--vscode-focusBorder);
+
+  /* ---- Buttons ---- */
+  --fm-btn-bg:                var(--vscode-button-background);
+  --fm-btn-fg:                var(--vscode-button-foreground);
+  --fm-btn-hover-bg:          var(--vscode-button-hoverBackground);
+  --fm-btn-secondary-bg:      var(--vscode-button-secondaryBackground);
+  --fm-btn-secondary-fg:      var(--vscode-button-secondaryForeground);
+  --fm-btn-secondary-hover:   var(--vscode-button-secondaryHoverBackground);
+
+  /* ---- Lists & Tables ---- */
+  --fm-list-hover-bg:         var(--vscode-list-hoverBackground);
+  --fm-list-hover-fg:         var(--vscode-list-hoverForeground, var(--fm-fg));
+  --fm-list-active-bg:        var(--vscode-list-activeSelectionBackground);
+  --fm-list-active-fg:        var(--vscode-list-activeSelectionForeground);
+  --fm-list-inactive-bg:      var(--vscode-list-inactiveSelectionBackground);
+  --fm-list-inactive-fg:      var(--vscode-list-inactiveSelectionForeground, var(--fm-fg));
+  --fm-list-stripe:           var(--vscode-list-hoverBackground);
+
+  /* ---- Tabs ---- */
+  --fm-tab-active-bg:         var(--vscode-tab-activeBackground, var(--fm-bg));
+  --fm-tab-active-fg:         var(--vscode-tab-activeForeground);
+  --fm-tab-active-border:     var(--vscode-tab-activeBorderTop, var(--fm-btn-bg));
+  --fm-tab-inactive-bg:       var(--vscode-tab-inactiveBackground, transparent);
+  --fm-tab-inactive-fg:       var(--vscode-tab-inactiveForeground);
+
+  /* ---- Badges & Status ---- */
+  --fm-badge-bg:              var(--vscode-badge-background);
+  --fm-badge-fg:              var(--vscode-badge-foreground);
+
+  /* ---- Scrollbar ---- */
+  --fm-scrollbar-bg:          var(--vscode-scrollbarSlider-background);
+  --fm-scrollbar-hover:       var(--vscode-scrollbarSlider-hoverBackground);
+  --fm-scrollbar-active:      var(--vscode-scrollbarSlider-activeBackground);
+
+  /* ---- Widget / Dropdown ---- */
+  --fm-widget-bg:             var(--vscode-editorWidget-background, var(--fm-bg-secondary));
+  --fm-widget-fg:             var(--vscode-editorWidget-foreground, var(--fm-fg));
+  --fm-widget-border:         var(--vscode-editorWidget-border, var(--fm-border));
+  --fm-widget-shadow:         var(--vscode-widget-shadow, rgba(0,0,0,0.36));
+
+  /* ---- Progress Bar ---- */
+  --fm-progress-bg:           var(--vscode-progressBar-background);
+
+  /* ---- Semantic Colors ---- */
+  --fm-success:               var(--vscode-testing-iconPassed, #73c991);
+  --fm-error:                 var(--vscode-errorForeground, #f48771);
+  --fm-warning:               var(--vscode-editorWarning-foreground, #cca700);
+  --fm-info:                  var(--vscode-editorInfo-foreground, #75beff);
+
+  /* ---- Sizing ---- */
+  --fm-control-height:        24px;
+  --fm-font-size:             var(--vscode-font-size, 13px);
+  --fm-font-family:           var(--vscode-font-family, -apple-system, BlinkMacSystemFont, sans-serif);
+  --fm-font-mono:             var(--vscode-editor-font-family, 'Consolas', 'Courier New', monospace);
+  --fm-radius:                2px;
+  --fm-row-height:            22px;
+
+  /* ---- Panel ---- */
+  --fm-panel-bg:              var(--vscode-panel-background, var(--fm-bg-secondary));
+  --fm-panel-fg:              var(--vscode-panelTitle-activeForeground, var(--fm-fg));
+
+  /* ---- Header / Toolbar ---- */
+  --fm-header-bg:             var(--vscode-titleBar-activeBackground, var(--fm-bg-secondary));
+  --fm-header-fg:             var(--vscode-titleBar-activeForeground, var(--fm-fg));
+
+  /* ---- Resize Handle ---- */
+  --fm-handle-hover:          var(--vscode-sash-hoverBorder, var(--fm-btn-bg));
+}

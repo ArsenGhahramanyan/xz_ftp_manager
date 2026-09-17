@@ -1,0 +1,73 @@
+/* ==========================================================================
+   xZ FTP Manager - Context Menu
+   Floating right-click menu, items, hover, separator, keyboard nav.
+   ========================================================================== */
+
+/* ---- Context Menu ---- */
+.context-menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 160px;
+  max-width: 280px;
+  padding: 4px 0;
+  background: var(--fm-widget-bg);
+  color: var(--fm-widget-fg);
+  border: 1px solid var(--fm-widget-border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px var(--fm-widget-shadow);
+  font-size: var(--fm-font-size);
+  user-select: none;
+  outline: none;
+}
+
+/* ---- Context Menu Item ---- */
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--fm-widget-fg);
+}
+
+.context-menu-item:hover {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+}
+
+.context-menu-item:active {
+  opacity: 0.85;
+}
+
+.context-menu-item.disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Icon area in menu item */
+.context-menu-item .icon {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Shortcut / hint text on the right */
+.context-menu-item .shortcut {
+  margin-left: auto;
+  padding-left: 16px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* ---- Context Menu Separator ---- */
+.context-menu-separator {
+  height: 1px;
+  margin: 4px 8px;
+  background: var(--fm-widget-border);
+}

@@ -1,0 +1,335 @@
+/* ==========================================================================
+   xZ FTP Manager - File List / Table
+   File table, header sort indicators, rows, selection, file icons,
+   column layout, loading/empty states.
+   ========================================================================== */
+
+/* ---- File List Container ---- */
+.file-list {
+  flex: 1 1 0;
+  overflow: auto;
+  min-height: 0;
+  background: var(--fm-bg);
+}
+
+/* ---- File Table ---- */
+.file-table {
+  width: 100%;
+  min-width: max-content;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-size: calc(var(--fm-font-size) - 1px);
+}
+
+/* ---- Table Header ---- */
+.file-table-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  background: var(--fm-bg-secondary);
+}
+
+.file-table-header-cell {
+  height: var(--fm-row-height);
+  padding: 0 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--fm-fg);
+  border-bottom: 1px solid var(--fm-border);
+  border-right: 1px solid var(--fm-border);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.file-table-header-cell:last-child {
+  border-right: none;
+}
+
+.file-table-header-cell:hover {
+  background: var(--fm-list-hover-bg);
+}
+
+.file-table-header-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* ---- Column Resizer ---- */
+.column-resizer {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 3;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.column-resizer:hover,
+.column-resizer.dragging {
+  background: var(--fm-handle-hover);
+}
+
+/* Sort indicators */
+.file-table-header-cell.sort-asc::after,
+.file-table-header-cell.sort-desc::after {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 9px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+.file-table-header-cell.sort-asc::after {
+  content: '\25B2';  /* up triangle */
+}
+
+.file-table-header-cell.sort-desc::after {
+  content: '\25BC';  /* down triangle */
+}
+
+/* ---- Table Body ---- */
+.file-table-body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* ---- Table Row ---- */
+.file-table-row {
+  display: flex;
+  align-items: center;
+  height: var(--fm-row-height);
+  cursor: default;
+  /* Row selection is row-level (`.selected` class), not text-level. Allowing
+     text selection inside rows would let Ctrl+A bleed into highlighting file
+     names and confuse the "active pane" indicator. */
+  user-select: none;
+}
+
+.file-table-row:hover {
+  background: var(--fm-list-hover-bg);
+  color: var(--fm-list-hover-fg);
+}
+
+.file-table-row.selected {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+}
+
+.file-table-row.selected:hover {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+}
+
+/* When this pane is not the active one, render selected rows with the
+   muted "inactive selection" color (active-pane focus indication). */
+.file-pane.pane-inactive .file-table-row.selected,
+.file-pane.pane-inactive .file-table-row.selected:hover {
+  background: var(--fm-list-inactive-bg);
+  color: var(--fm-list-inactive-fg);
+}
+
+/* Subtle alternation (optional - light stripe) */
+.file-table-body .file-table-row:nth-child(even) {
+  background: rgba(128, 128, 128, 0.04);
+}
+
+.file-table-body .file-table-row:nth-child(even):hover {
+  background: var(--fm-list-hover-bg);
+}
+
+.file-table-body .file-table-row.selected:nth-child(even) {
+  background: var(--fm-list-active-bg);
+}
+
+/* Stripe override: even-child selected row inside an inactive pane should
+   still use the muted color (specificity tiebreaker for the rule above). */
+.file-pane.pane-inactive .file-table-body .file-table-row.selected:nth-child(even) {
+  background: var(--fm-list-inactive-bg);
+  color: var(--fm-list-inactive-fg);
+}
+
+/* Parent ".." entry: never striped, never selected/active highlight,
+   only subtle hover. */
+.file-table-row-parent,
+.file-table-body .file-table-row-parent:nth-child(even),
+.file-table-body .file-table-row-parent.selected,
+.file-table-body .file-table-row-parent.selected:nth-child(even) {
+  background: transparent;
+  color: var(--fm-fg);
+}
+
+.file-table-row-parent:hover,
+.file-table-body .file-table-row-parent:nth-child(even):hover {
+  background: var(--fm-list-hover-bg);
+  color: var(--fm-list-hover-fg);
+}
+
+/* ---- Table Cell ---- */
+.file-table-cell {
+  min-width: 0;
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  height: var(--fm-row-height);
+  line-height: var(--fm-row-height);
+  border-bottom: none;
+}
+
+/* Name column (flex-grow handled by table-layout: fixed + width) */
+.file-table-cell.col-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.file-table-cell.col-size {
+  text-align: right;
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+}
+
+.file-table-cell.col-date {
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.file-table-cell.col-permissions {
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* ---- File Name ---- */
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- File Icon ---- */
+.file-icon {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Folder / directory icons */
+.icon-folder::before    { content: '\1F4C1'; } /* open folder */
+.icon-parent::before {
+  content: '\2191'; /* up arrow (text style, no emoji rendering) */
+  font-family: var(--fm-font-mono);
+  color: var(--fm-fg);
+  opacity: 0.75;
+}
+.icon-symlink::before   { content: '\1F517'; } /* link */
+
+/* Generic file */
+.icon-file::before      { content: '\1F4C4'; } /* page */
+
+/* Language-specific file icons */
+.icon-typescript::before   { content: '\1F1F9'; font-size: 12px; } /* T indicator */
+.icon-javascript::before   { content: '\1F1EF'; font-size: 12px; } /* J indicator */
+.icon-json::before         { content: '\007B\007D'; font-size: 10px; font-family: var(--fm-font-mono); }
+.icon-html::before         { content: '\1F310'; } /* globe */
+.icon-css::before          { content: '\1F3A8'; } /* palette */
+.icon-image::before        { content: '\1F5BC'; } /* frame/picture */
+.icon-markdown::before     { content: '\1F4DD'; } /* memo */
+.icon-python::before       { content: '\1F40D'; } /* snake */
+.icon-git::before          { content: '\1F500'; } /* shuffle arrows */
+.icon-config::before       { content: '\2699\FE0F'; } /* gear */
+.icon-archive::before      { content: '\1F4E6'; } /* package */
+.icon-video::before        { content: '\1F3AC'; } /* clapper */
+.icon-audio::before        { content: '\1F3B5'; } /* music note */
+.icon-pdf::before          { content: '\1F4D5'; } /* closed book */
+.icon-xml::before          { content: '\1F3F7\FE0F'; } /* label */
+.icon-shell::before        { content: '\1F4BB'; } /* computer */
+.icon-text::before         { content: '\1F4C3'; } /* page curl */
+.icon-lock::before         { content: '\1F512'; } /* lock */
+.icon-binary::before       { content: '\1F4BE'; } /* floppy */
+.icon-database::before     { content: '\1F5C4'; } /* file cabinet */
+.icon-font::before         { content: '\1F524'; } /* abc */
+
+/* ---- Drag & Drop ---- */
+.file-table-row.dragging {
+  opacity: 0.5;
+}
+
+.file-table-row.drop-over-folder {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+  outline: 1px dashed var(--fm-handle-hover);
+  outline-offset: -1px;
+}
+
+.folder-tree-item.drop-over-folder {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+  outline: 1px dashed var(--fm-handle-hover);
+  outline-offset: -1px;
+}
+
+.file-pane.drop-target-pane {
+  outline: 2px dashed var(--fm-handle-hover);
+  outline-offset: -4px;
+}
+
+/* ---- Loading / Empty States ---- */
+.loading-row,
+.empty-row {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fm-fg);
+  opacity: 0.6;
+  font-style: italic;
+  font-size: var(--fm-font-size);
+  user-select: none;
+}
+
+.loading-row::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--fm-border);
+  border-top-color: var(--fm-btn-bg);
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: fm-spin 0.8s linear infinite;
+}
+
+@keyframes fm-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Column Widths (default via colgroup or inline styles) ---- */
+/* These provide sensible defaults if not overridden inline */
+.col-w-name     { width: 40%; }
+.col-w-size     { width: 15%; }
+.col-w-date     { width: 25%; }
+.col-w-perms    { width: 20%; }

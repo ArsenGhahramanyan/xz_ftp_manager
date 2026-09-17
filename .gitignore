@@ -1,0 +1,14 @@
+node_modules/
+dist/
+vsix/
+out-test/
+*.vsix
+.vscode-test/
+.vs/
+.claude/
+*.pem
+id_rsa
+id_ed25519
+
+# stray test data
+*.xml

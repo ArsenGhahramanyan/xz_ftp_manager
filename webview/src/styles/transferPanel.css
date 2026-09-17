@@ -1,0 +1,310 @@
+/* ==========================================================================
+   xZ FTP Manager - Transfer Panel
+   Bottom panel: resize handle, tabs, action button group, transfer rows
+   with progress bars, status colors.
+   ========================================================================== */
+
+/* ---- Transfer Panel ---- */
+.transfer-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--fm-panel-bg);
+  border-top: 1px solid var(--fm-border);
+  flex-shrink: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ---- Resize Handle (horizontal, at top of panel) ---- */
+.transfer-resize-handle {
+  height: 4px;
+  flex-shrink: 0;
+  cursor: row-resize;
+  background: var(--fm-border);
+  transition: background 0.15s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.transfer-resize-handle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  bottom: -2px;
+}
+
+.transfer-resize-handle:hover,
+.transfer-resize-handle:active {
+  background: var(--fm-handle-hover);
+}
+
+/* ---- Transfer Header (tabs + actions) ---- */
+.transfer-header {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  background: var(--fm-bg-secondary);
+  border-bottom: 1px solid var(--fm-border);
+  flex-shrink: 0;
+  min-height: 30px;
+  gap: 4px;
+}
+
+/* ---- Transfer Tabs ---- */
+.transfer-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.transfer-tab {
+  height: 28px;
+  padding: 0 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: var(--fm-tab-inactive-bg);
+  color: var(--fm-tab-inactive-fg);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transfer-tab:hover {
+  color: var(--fm-tab-active-fg);
+  background: transparent;
+}
+
+.transfer-tab.active {
+  color: var(--fm-tab-active-fg);
+  border-bottom-color: var(--fm-tab-active-border);
+  background: transparent;
+}
+
+.transfer-tab .badge {
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--fm-badge-bg);
+  color: var(--fm-badge-fg);
+  text-align: center;
+}
+
+/* ---- Transfer Actions (grouped buttons) ---- */
+.transfer-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.transfer-action-btn {
+  height: var(--fm-control-height);
+  min-width: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--fm-border);
+  border-radius: 0;
+  background: var(--fm-btn-secondary-bg);
+  color: var(--fm-btn-secondary-fg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  white-space: nowrap;
+  gap: 4px;
+}
+
+/* Collapse borders between adjacent action buttons */
+.transfer-action-btn + .transfer-action-btn {
+  margin-left: -1px;
+}
+
+/* First action button: round left corners */
+.transfer-action-btn:first-child {
+  border-top-left-radius: var(--fm-radius);
+  border-bottom-left-radius: var(--fm-radius);
+}
+
+/* Last action button: round right corners */
+.transfer-action-btn:last-child {
+  border-top-right-radius: var(--fm-radius);
+  border-bottom-right-radius: var(--fm-radius);
+}
+
+.transfer-action-btn:hover {
+  background: var(--fm-btn-secondary-hover);
+  z-index: 1;
+}
+
+.transfer-action-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---- Transfer Body ---- */
+.transfer-body {
+  flex: 1 1 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+/* ---- Transfer Row ---- */
+.transfer-row {
+  display: flex;
+  align-items: center;
+  height: var(--fm-row-height);
+  padding: 0 8px;
+  gap: 8px;
+  font-size: calc(var(--fm-font-size) - 1px);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.transfer-row:hover {
+  background: var(--fm-list-hover-bg);
+}
+
+/* ---- Transfer Direction Arrow ---- */
+.transfer-direction {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.transfer-direction.upload {
+  color: var(--fm-info);
+}
+
+.transfer-direction.upload::before {
+  content: '\2191';  /* up arrow */
+}
+
+.transfer-direction.download {
+  color: var(--fm-success);
+}
+
+.transfer-direction.download::before {
+  content: '\2193';  /* down arrow */
+}
+
+/* ---- Transfer Fields ---- */
+.transfer-filename {
+  flex: 2 1 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.transfer-size {
+  flex: 0 0 70px;
+  text-align: right;
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.transfer-speed {
+  flex: 0 0 65px;
+  text-align: right;
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.transfer-eta {
+  flex: 0 0 60px;
+  text-align: right;
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.transfer-status {
+  flex: 0 0 80px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ---- Progress Bar ---- */
+.transfer-progress-container {
+  flex: 1 1 80px;
+  height: 12px;
+  background: rgba(128, 128, 128, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  min-width: 60px;
+}
+
+.transfer-progress-bar {
+  height: 100%;
+  background: var(--fm-progress-bg);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  min-width: 0;
+}
+
+.transfer-progress-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--fm-fg);
+  pointer-events: none;
+}
+
+/* ---- Status Colors ---- */
+.status-transferring {
+  color: var(--fm-info);
+}
+
+.status-completed {
+  color: var(--fm-success);
+}
+
+.status-failed {
+  color: var(--fm-error);
+}
+
+.status-paused {
+  color: var(--fm-warning);
+}
+
+.status-queued {
+  color: var(--fm-fg);
+  opacity: 0.6;
+}
+
+/* ---- Transfer Empty State ---- */
+.transfer-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  color: var(--fm-fg);
+  opacity: 0.5;
+  font-style: italic;
+  user-select: none;
+}

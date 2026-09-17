@@ -1,0 +1,181 @@
+/* ==========================================================================
+   xZ FTP Manager - Main / Global Styles
+   Body reset, .app-root layout, base button/input styles, scrollbars.
+   ========================================================================== */
+
+@import './variables.css';
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--fm-bg);
+  color: var(--fm-fg);
+  font-family: var(--fm-font-family);
+  font-size: var(--fm-font-size);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- App Root ---- */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--fm-bg);
+  color: var(--fm-fg);
+  /* Suppress browser-level "select all text" on Ctrl+A. Without this, if our
+     JS keydown handler ever fails to intercept (e.g. focus on a div parent of
+     the toolbar), the browser would highlight the entire UI — toolbar paths,
+     breadcrumb, transfer rows — and override the row-level `.selected`
+     state. Inputs/textareas re-enable text selection below. */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Re-allow text selection inside fields where the user is actually typing. */
+.app-root input,
+.app-root textarea,
+.app-root [contenteditable="true"] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* ---- Base Button ---- */
+button {
+  font-family: inherit;
+  font-size: var(--fm-font-size);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: var(--fm-btn-secondary-fg);
+  background: var(--fm-btn-secondary-bg);
+  height: var(--fm-control-height);
+  padding: 0 8px;
+  line-height: var(--fm-control-height);
+  border-radius: var(--fm-radius);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+button:hover {
+  background: var(--fm-btn-secondary-hover);
+}
+
+button:focus-visible {
+  outline: 1px solid var(--fm-input-focus-border);
+  outline-offset: -1px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---- Primary Button ---- */
+button.primary,
+.dialog-btn-primary {
+  background: var(--fm-btn-bg);
+  color: var(--fm-btn-fg);
+}
+
+button.primary:hover,
+.dialog-btn-primary:hover {
+  background: var(--fm-btn-hover-bg);
+}
+
+/* ---- Base Input ---- */
+input,
+select {
+  font-family: inherit;
+  font-size: var(--fm-font-size);
+  height: var(--fm-control-height);
+  padding: 0 6px;
+  border: 1px solid var(--fm-input-border);
+  border-radius: var(--fm-radius);
+  background: var(--fm-input-bg);
+  color: var(--fm-input-fg);
+  outline: none;
+  line-height: var(--fm-control-height);
+}
+
+input::placeholder {
+  color: var(--fm-input-placeholder);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--fm-input-focus-border);
+}
+
+select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fm-scrollbar-bg);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fm-scrollbar-hover);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--fm-scrollbar-active);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ---- Text Utilities ---- */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: var(--fm-font-mono);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--vscode-editor-selectionBackground, rgba(38, 79, 120, 0.6));
+  color: var(--vscode-editor-selectionForeground, inherit);
+}

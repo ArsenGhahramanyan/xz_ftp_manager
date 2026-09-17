@@ -1,0 +1,385 @@
+{
+  "name": "ftp-manager",
+  "displayName": "xZ FTP Manager",
+  "description": "Full-featured FTP/FTPS/SFTP client for VS Code",
+  "version": "1.6.2",
+  "publisher": "ghahr",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArsenGhahramanyan/xz_ftp_manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArsenGhahramanyan/xz_ftp_manager/issues"
+  },
+  "homepage": "https://github.com/ArsenGhahramanyan/xz_ftp_manager#readme",
+  "keywords": [
+    "ftp",
+    "sftp",
+    "ftps",
+    "file transfer",
+    "remote"
+  ],
+  "icon": "media/icon.png",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onView:ftpManager.siteManager",
+    "onCommand:ftpManager.openPanel"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ftpManager",
+          "title": "xZ FTP Manager",
+          "icon": "media/icons/dark/connect.svg"
+        }
+      ]
+    },
+    "views": {
+      "ftpManager": [
+        {
+          "id": "ftpManager.siteManager",
+          "name": "Site Manager"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ftpManager.openPanel",
+        "title": "Open xZ FTP Manager",
+        "category": "xZ FTP Manager",
+        "icon": "$(remote-explorer)"
+      },
+      {
+        "command": "ftpManager.navigateRemote",
+        "title": "Navigate Remote Path",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.connect",
+        "title": "Connect",
+        "category": "xZ FTP Manager",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "ftpManager.disconnect",
+        "title": "Disconnect",
+        "category": "xZ FTP Manager",
+        "icon": "$(debug-disconnect)"
+      },
+      {
+        "command": "ftpManager.quickConnect",
+        "title": "Quick Connect",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.addSite",
+        "title": "Add Site",
+        "category": "xZ FTP Manager",
+        "icon": "$(add)"
+      },
+      {
+        "command": "ftpManager.editSite",
+        "title": "Edit Site",
+        "category": "xZ FTP Manager",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "ftpManager.deleteSite",
+        "title": "Delete Site",
+        "category": "xZ FTP Manager",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "ftpManager.addFolder",
+        "title": "Add Folder",
+        "category": "xZ FTP Manager",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "ftpManager.exportSites",
+        "title": "Export Sites…",
+        "category": "xZ FTP Manager",
+        "icon": "$(export)"
+      },
+      {
+        "command": "ftpManager.importSites",
+        "title": "Import Sites…",
+        "category": "xZ FTP Manager",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "ftpManager.refresh",
+        "title": "Refresh",
+        "category": "xZ FTP Manager",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "ftpManager.toggleHidden",
+        "title": "Toggle Hidden Files",
+        "category": "xZ FTP Manager",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "ftpManager.searchRemote",
+        "title": "Search Remote Files",
+        "category": "xZ FTP Manager",
+        "icon": "$(search)"
+      },
+      {
+        "command": "ftpManager.pauseTransfer",
+        "title": "Pause Transfer",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.resumeTransfer",
+        "title": "Resume Transfer",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.cancelTransfer",
+        "title": "Cancel Transfer",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.retryTransfer",
+        "title": "Retry Transfer",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.pauseAllTransfers",
+        "title": "Pause All Transfers",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.resumeAllTransfers",
+        "title": "Resume All Transfers",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.cancelAllTransfers",
+        "title": "Cancel All Transfers",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.retryAllFailed",
+        "title": "Retry All Failed",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.clearCompleted",
+        "title": "Clear Completed",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.openConnectionLog",
+        "title": "Show Connection Log",
+        "category": "xZ FTP Manager"
+      },
+      {
+        "command": "ftpManager.openTransferLog",
+        "title": "Show Transfer Log",
+        "category": "xZ FTP Manager"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "ftpManager.addSite",
+          "when": "view == ftpManager.siteManager",
+          "group": "navigation"
+        },
+        {
+          "command": "ftpManager.addFolder",
+          "when": "view == ftpManager.siteManager",
+          "group": "navigation"
+        },
+        {
+          "command": "ftpManager.exportSites",
+          "when": "view == ftpManager.siteManager",
+          "group": "1_io@1"
+        },
+        {
+          "command": "ftpManager.importSites",
+          "when": "view == ftpManager.siteManager",
+          "group": "1_io@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "ftpManager.connect",
+          "when": "view == ftpManager.siteManager && viewItem == site",
+          "group": "inline"
+        },
+        {
+          "command": "ftpManager.editSite",
+          "when": "view == ftpManager.siteManager && viewItem == site",
+          "group": "1_modify@1"
+        },
+        {
+          "command": "ftpManager.deleteSite",
+          "when": "view == ftpManager.siteManager && viewItem =~ /^(site|folder)$/",
+          "group": "1_modify@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "xZ FTP Manager",
+      "properties": {
+        "ftpManager.defaultLocalDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Default local directory"
+        },
+        "ftpManager.showHiddenFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show hidden files"
+        },
+        "ftpManager.transferMode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "binary",
+            "ascii"
+          ],
+          "default": "auto",
+          "description": "File transfer mode"
+        },
+        "ftpManager.maxConcurrentTransfers": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Max simultaneous transfers"
+        },
+        "ftpManager.defaultOverwriteRule": {
+          "type": "string",
+          "enum": [
+            "overwrite",
+            "skip",
+            "rename",
+            "ask",
+            "overwriteIfNewer",
+            "overwriteIfSizeDiffers",
+            "resume"
+          ],
+          "default": "ask",
+          "description": "Default overwrite action. 'resume' continues a partial transfer from the last received byte (FTP REST / SFTP offset)."
+        },
+        "ftpManager.preserveTimestamp": {
+          "type": "boolean",
+          "default": true,
+          "description": "Preserve file timestamps"
+        },
+        "ftpManager.asciiFileExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".txt",
+            ".html",
+            ".htm",
+            ".css",
+            ".js",
+            ".ts",
+            ".json",
+            ".xml",
+            ".csv",
+            ".md",
+            ".yaml",
+            ".yml",
+            ".svg",
+            ".php",
+            ".py",
+            ".rb",
+            ".java",
+            ".c",
+            ".cpp",
+            ".h",
+            ".sh",
+            ".bat"
+          ],
+          "description": "ASCII mode extensions"
+        },
+        "ftpManager.connectionTimeout": {
+          "type": "number",
+          "default": 30,
+          "minimum": 5,
+          "description": "Connection timeout (seconds)"
+        },
+        "ftpManager.keepaliveInterval": {
+          "type": "number",
+          "default": 60,
+          "minimum": 0,
+          "description": "Keepalive interval (0=disabled)"
+        },
+        "ftpManager.retryCount": {
+          "type": "number",
+          "default": 3,
+          "minimum": 0,
+          "description": "Retry count for failed transfers"
+        },
+        "ftpManager.retryDelay": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "description": "Retry delay (seconds)"
+        },
+        "ftpManager.logLevel": {
+          "type": "string",
+          "enum": [
+            "off",
+            "error",
+            "info",
+            "debug"
+          ],
+          "default": "info",
+          "description": "Log level"
+        },
+        "ftpManager.autoUploadOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-upload on save"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p webview/tsconfig.json",
+    "lint": "eslint src webview/src --ext .ts",
+    "pretest": "tsc -p tsconfig.test.json",
+    "test": "node --test \"out-test/test/**/*.test.js\"",
+    "package": "vsce package --out vsix/"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.3.0",
+    "ssh2": "^1.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ssh2": "^1.15.0",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vscode/vsce": "^2.22.0",
+    "css-loader": "^6.9.0",
+    "eslint": "^9.0.0",
+    "mini-css-extract-plugin": "^2.10.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

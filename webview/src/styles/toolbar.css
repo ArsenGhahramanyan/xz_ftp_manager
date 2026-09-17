@@ -1,0 +1,198 @@
+/* ==========================================================================
+   xZ FTP Manager - Toolbar, Filter Bar
+   Nav button group with shared borders, path input, hidden toggle,
+   filter input.
+   ========================================================================== */
+
+/* ---- Toolbar ---- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background: var(--fm-bg);
+  border-bottom: 1px solid var(--fm-border);
+  flex-shrink: 0;
+  min-height: 30px;
+  position: relative;
+}
+
+/* ---- Sort menu (popover anchored to the toolbar) ---- */
+.toolbar-sort-menu {
+  position: absolute;
+  top: 100%;
+  left: 6px;
+  min-width: 180px;
+  z-index: 50;
+  background: var(--fm-panel-bg, #1e1e1e);
+  border: 1px solid var(--fm-border, #3e3e3e);
+  border-radius: var(--fm-radius, 3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+.toolbar-sort-menu.is-hidden {
+  display: none;
+}
+
+.toolbar-sort-heading {
+  padding: 4px 10px 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+}
+
+.toolbar-sort-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 4px 12px;
+  background: transparent;
+  border: none;
+  color: var(--fm-fg);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  white-space: pre;
+}
+
+.toolbar-sort-item:hover {
+  background: var(--fm-list-hover-bg);
+}
+
+.toolbar-sort-sep {
+  height: 1px;
+  background: var(--fm-border);
+  margin: 4px 0;
+}
+
+.toolbar-sort-direction {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* ---- Nav Button Group (shared borders) ---- */
+.toolbar-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.toolbar-btn {
+  height: var(--fm-control-height);
+  min-width: 28px;
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: var(--fm-radius);
+  background: transparent;
+  color: var(--fm-fg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.toolbar-btn + .toolbar-btn {
+  margin-left: 2px;
+}
+
+.toolbar-btn:hover {
+  background: var(--fm-list-hover-bg);
+  z-index: 1;
+}
+
+.toolbar-btn:active {
+  opacity: 0.8;
+}
+
+.toolbar-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---- Standalone Toggle Button ---- */
+.toolbar-btn-single {
+  height: var(--fm-control-height);
+  min-width: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  background: var(--fm-btn-secondary-bg);
+  color: var(--fm-btn-secondary-fg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-family: var(--fm-font-mono);
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.toolbar-btn-single:hover {
+  background: var(--fm-btn-secondary-hover);
+}
+
+.toolbar-btn-single.active {
+  background: var(--fm-btn-bg);
+  color: var(--fm-btn-fg);
+  border-color: var(--fm-btn-bg);
+}
+
+.toolbar-btn-single.active:hover {
+  background: var(--fm-btn-hover-bg);
+}
+
+/* ---- Path Input ---- */
+.toolbar-pane-label {
+  font-size: calc(var(--fm-font-size) - 1px);
+  font-weight: 600;
+  color: var(--fm-fg);
+  opacity: 0.7;
+  flex-shrink: 0;
+  padding: 0 4px 0 2px;
+  user-select: none;
+}
+
+.toolbar-path {
+  flex: 1 1 auto;
+  min-width: 60px;
+  height: var(--fm-control-height);
+  font-family: var(--fm-font-mono);
+  font-size: calc(var(--fm-font-size) - 1px);
+}
+
+/* ---- Filter Bar ---- */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  background: var(--fm-bg);
+  border-bottom: 1px solid var(--fm-border);
+  flex-shrink: 0;
+}
+
+.filter-input {
+  width: 100%;
+  height: 20px;
+  font-size: calc(var(--fm-font-size) - 1px);
+  padding: 0 6px;
+  border: 1px solid var(--fm-input-border);
+  border-radius: var(--fm-radius);
+  background: var(--fm-input-bg);
+  color: var(--fm-input-fg);
+  outline: none;
+}
+
+.filter-input:focus {
+  border-color: var(--fm-input-focus-border);
+}
+
+.filter-input::placeholder {
+  color: var(--fm-input-placeholder);
+}

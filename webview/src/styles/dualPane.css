@@ -1,0 +1,335 @@
+/* ==========================================================================
+   xZ FTP Manager - Dual Pane Layout
+   Quick connect bar, side-by-side panes, split handle, pane headers.
+   ========================================================================== */
+
+/* ---- Quick Connect Bar ---- */
+.quick-connect-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #000;
+  flex-shrink: 0;
+  min-height: 32px;
+}
+
+/* Individual gray blocks */
+.qc-select {
+  width: 74px;
+  flex: 0 0 74px;
+  height: var(--fm-control-height);
+  background: #2d2d2d;
+  color: #ccc;
+  border: 1px solid #3e3e3e;
+  border-radius: 3px;
+  outline: none;
+  padding-right: 20px;
+}
+
+.qc-input {
+  height: var(--fm-control-height);
+  background: #2d2d2d;
+  color: #ccc;
+  border: 1px solid #3e3e3e;
+  border-radius: 3px;
+  outline: none;
+}
+
+.qc-select:focus,
+.qc-input:focus {
+  border-color: #007acc;
+}
+
+.qc-host     { width: 150px; flex: 0 0 150px; }
+.qc-port     { width: 52px;  flex: 0 0 52px; text-align: center; }
+.qc-username { width: 100px; flex: 0 0 100px; }
+.qc-password { width: 100px; flex: 0 0 100px; }
+
+.qc-connect-btn {
+  height: var(--fm-control-height);
+  padding: 0 8px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.qc-connect-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.qc-connect-btn.connected {
+  color: #fff;
+}
+
+.qc-connect-btn.connected:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.qc-pane-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--fm-header-fg);
+  flex-shrink: 0;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ---- Offline Banner ---- */
+.offline-banner {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  background: var(--vscode-inputValidation-errorBackground, #5a1d1d);
+  color: var(--vscode-inputValidation-errorForeground, #f5b3b3);
+  border-bottom: 1px solid var(--vscode-inputValidation-errorBorder, #8a3232);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.offline-banner.is-hidden {
+  display: none;
+}
+
+/* ---- Dual Pane Container ---- */
+.dual-pane {
+  display: flex;
+  flex-direction: row;     /* CRITICAL: side by side */
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ---- Pane Container ---- */
+.pane-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  flex: 1 1 50%;
+}
+
+.pane-left {
+  /* Left pane */
+}
+
+.pane-right {
+  /* Right pane */
+}
+
+/* ---- Split Handle (vertical divider) ---- */
+.split-handle {
+  width: 4px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  background: var(--fm-border);
+  transition: background 0.15s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.split-handle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -2px;
+  right: -2px;
+}
+
+.split-handle:hover,
+.split-handle:active {
+  background: var(--fm-handle-hover);
+}
+
+/* ---- File Pane ---- */
+.file-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.file-pane-local {
+  /* Local pane specifics (if any) */
+}
+
+.file-pane-remote {
+  /* Remote pane specifics (if any) */
+}
+
+/* ---- File Pane Split Area (tree + splitter + list) ---- */
+.file-pane-split-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.file-pane-tree-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 40px;
+}
+
+.file-pane-list-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 40px;
+}
+
+/* ---- Horizontal Split Handle ---- */
+.h-split-handle {
+  height: 4px;
+  flex-shrink: 0;
+  cursor: row-resize;
+  background: var(--fm-border);
+  transition: background 0.15s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.h-split-handle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  bottom: -2px;
+}
+
+.h-split-handle:hover,
+.h-split-handle:active {
+  background: var(--fm-handle-hover);
+}
+
+/* ---- Pane Header ---- */
+.pane-header {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  background: var(--fm-header-bg);
+  color: var(--fm-header-fg);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--fm-border);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.pane-header .label {
+  flex: 1;
+}
+
+.pane-header .status {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* ---- Folder Tree ---- */
+.folder-tree {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.folder-tree-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.folder-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 4px;
+  cursor: pointer;
+  font-size: calc(var(--fm-font-size) - 1px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: var(--fm-row-height);
+  user-select: none;
+}
+
+.folder-tree-item:hover {
+  background: var(--fm-list-hover-bg);
+  color: var(--fm-list-hover-fg);
+}
+
+.folder-tree-item.folder-tree-active {
+  background: var(--fm-list-active-bg);
+  color: var(--fm-list-active-fg);
+}
+
+/* When this pane is not the active one, render the highlighted folder in
+   the muted "inactive" tone — mirrors `.file-pane.pane-inactive
+   .file-table-row.selected` so both halves of the pane (folder tree on top,
+   file list on bottom) tell the same focus story. */
+.file-pane.pane-inactive .folder-tree-item.folder-tree-active,
+.file-pane.pane-inactive .folder-tree-item.folder-tree-active:hover {
+  background: var(--fm-list-inactive-bg);
+  color: var(--fm-list-inactive-fg);
+}
+
+.folder-tree-expand {
+  flex-shrink: 0;
+  width: 14px;
+  font-size: 9px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.folder-tree-expand:hover {
+  opacity: 1;
+}
+
+.folder-tree-icon {
+  flex-shrink: 0;
+  width: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.folder-tree-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folder-tree-empty {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--fm-fg);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ---- Disabled Quick Connect Inputs ---- */
+.qc-select:disabled,
+.qc-input:disabled {
+  opacity: 0.7;
+  cursor: default;
+}

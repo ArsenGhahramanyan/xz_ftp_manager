@@ -1,0 +1,238 @@
+:root {
+  --fm-bg: var(--vscode-editor-background);
+  --fm-fg: var(--vscode-editor-foreground);
+  --fm-border: var(--vscode-panel-border, var(--vscode-widget-border, rgba(128,128,128,0.35)));
+  --fm-widget-bg: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  --fm-widget-fg: var(--vscode-editorWidget-foreground, var(--vscode-editor-foreground));
+  --fm-widget-border: var(--vscode-editorWidget-border, var(--vscode-panel-border, rgba(128,128,128,0.35)));
+  --fm-widget-shadow: var(--vscode-widget-shadow, rgba(0,0,0,0.4));
+  --fm-input-bg: var(--vscode-input-background);
+  --fm-input-fg: var(--vscode-input-foreground);
+  --fm-input-border: var(--vscode-input-border, transparent);
+  --fm-input-focus: var(--vscode-focusBorder);
+  --fm-btn-bg: var(--vscode-button-background);
+  --fm-btn-fg: var(--vscode-button-foreground);
+  --fm-btn-hover: var(--vscode-button-hoverBackground);
+  --fm-btn-sec-bg: var(--vscode-button-secondaryBackground);
+  --fm-btn-sec-fg: var(--vscode-button-secondaryForeground);
+  --fm-btn-sec-hover: var(--vscode-button-secondaryHoverBackground);
+  --fm-tab-active-bg: var(--vscode-tab-activeBackground, var(--fm-bg));
+  --fm-tab-active-fg: var(--vscode-tab-activeForeground, var(--fm-fg));
+  --fm-tab-inactive-fg: var(--vscode-tab-inactiveForeground);
+  --fm-error: var(--vscode-errorForeground, #f48771);
+  --fm-success: var(--vscode-testing-iconPassed, #73c991);
+  --fm-warning: var(--vscode-editorWarning-foreground, #cca700);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  color: var(--fm-fg);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size, 13px);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  background: transparent;
+}
+
+/* ── Modal overlay (backdrop) ─────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  overflow: auto;
+  animation: fm-fade-in 0.12s ease;
+}
+@keyframes fm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal dialog card ────────────────────────────────────────── */
+.modal-dialog {
+  background: var(--fm-widget-bg);
+  color: var(--fm-widget-fg);
+  border: 1px solid var(--fm-widget-border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px var(--fm-widget-shadow);
+  width: 100%;
+  max-width: 560px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  animation: fm-dialog-in 0.15s ease;
+}
+@keyframes fm-dialog-in {
+  from { opacity: 0; transform: scale(0.96) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--fm-border);
+}
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--fm-border);
+  margin-bottom: 14px;
+}
+.tab {
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--fm-tab-inactive-fg);
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+}
+.tab:hover { color: var(--fm-fg); }
+.tab.active {
+  color: var(--fm-tab-active-fg);
+  border-bottom-color: var(--fm-btn-bg);
+}
+.panel { display: none; }
+.panel.active { display: block; }
+
+.row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.row.stack {
+  grid-template-columns: 1fr;
+}
+.row-wide {
+  grid-template-columns: 140px 1fr auto;
+}
+label {
+  font-size: 12px;
+  text-align: right;
+  opacity: 0.9;
+}
+.row.stack > label {
+  text-align: left;
+}
+input[type="text"], input[type="number"], input[type="password"], select {
+  width: 100%;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 2px;
+  border: 1px solid var(--fm-input-border);
+  background: var(--fm-input-bg);
+  color: var(--fm-input-fg);
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+}
+input:focus, select:focus {
+  border-color: var(--fm-input-focus);
+}
+input[disabled], select[disabled] {
+  opacity: 0.55;
+}
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.checkbox-row input[type="checkbox"] {
+  accent-color: var(--fm-btn-bg);
+  margin: 0;
+}
+.checkbox-row .label-left {
+  text-align: left;
+}
+.hint {
+  grid-column: 2 / -1;
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: -4px;
+}
+.section-heading {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+  margin: 16px 0 8px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--fm-border);
+}
+.section-heading:first-child {
+  margin-top: 0;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--fm-border);
+}
+.footer .spacer { flex: 1; }
+
+button.btn {
+  height: 26px;
+  min-width: 84px;
+  padding: 0 14px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background: var(--fm-btn-sec-bg);
+  color: var(--fm-btn-sec-fg);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+}
+button.btn:hover { background: var(--fm-btn-sec-hover); }
+button.btn.primary {
+  background: var(--fm-btn-bg);
+  color: var(--fm-btn-fg);
+}
+button.btn.primary:hover { background: var(--fm-btn-hover); }
+button.btn:disabled { opacity: 0.6; cursor: default; }
+
+.status {
+  font-size: 12px;
+  margin-right: auto;
+  min-height: 16px;
+}
+.status.ok { color: var(--fm-success); }
+.status.err { color: var(--fm-error); }
+.status.busy { opacity: 0.8; }
+
+.field-error {
+  color: var(--fm-error);
+  font-size: 11px;
+  grid-column: 2 / -1;
+}
+
+.pick-btn {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 2px;
+  border: 1px solid var(--fm-border);
+  background: transparent;
+  color: var(--fm-fg);
+  cursor: pointer;
+  font-size: 12px;
+}
+.pick-btn:hover { background: var(--fm-btn-sec-hover); }
+
+/* Hidden hint rows are toggled via the .is-hidden class to avoid relying on
+ * inline `style="display:none"` attributes (blocked by the strict CSP). */
+.is-hidden { display: none; }

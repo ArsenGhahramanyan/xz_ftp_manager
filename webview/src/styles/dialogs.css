@@ -1,0 +1,318 @@
+/* ==========================================================================
+   xZ FTP Manager - Dialogs
+   Modal overlay, permission (chmod) dialog, grid layout, checkboxes,
+   buttons.
+   ========================================================================== */
+
+/* ---- Search Results Overlay ---- */
+.search-results-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 950;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fm-fade-in 0.12s ease;
+}
+
+.search-results-overlay.is-hidden {
+  display: none;
+}
+
+.search-results-card {
+  background: var(--fm-widget-bg, #252526);
+  color: var(--fm-widget-fg, #ccc);
+  border: 1px solid var(--fm-widget-border, #3e3e3e);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  width: 60vw;
+  max-width: 720px;
+  height: 70vh;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.search-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--fm-border);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.search-results-close {
+  background: transparent;
+  border: none;
+  color: var(--fm-fg);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+.search-results-filter {
+  width: calc(100% - 24px);
+  margin: 8px 12px;
+  padding: 4px 6px;
+  background: var(--fm-input-bg, #2d2d2d);
+  color: var(--fm-fg);
+  border: 1px solid var(--fm-border);
+  border-radius: 3px;
+  font-size: 12px;
+  outline: none;
+}
+
+.search-results-filter:focus {
+  border-color: #007acc;
+}
+
+.search-results-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.search-results-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 24px 1fr 2fr;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: transparent;
+  border: none;
+  color: var(--fm-fg);
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+  font-family: inherit;
+}
+
+.search-results-row:hover {
+  background: var(--fm-list-hover-bg);
+}
+
+.search-results-icon {
+  text-align: center;
+}
+
+.search-results-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-results-path {
+  font-family: var(--fm-font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-results-empty {
+  padding: 30px 12px;
+  text-align: center;
+  opacity: 0.6;
+}
+
+/* ---- Dialog Overlay (backdrop) ---- */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fm-fade-in 0.12s ease;
+}
+
+@keyframes fm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---- Permission Dialog ---- */
+.permission-dialog {
+  background: var(--fm-widget-bg);
+  color: var(--fm-widget-fg);
+  border: 1px solid var(--fm-widget-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px var(--fm-widget-shadow);
+  min-width: 320px;
+  max-width: 420px;
+  padding: 16px 20px;
+  animation: fm-dialog-in 0.15s ease;
+}
+
+@keyframes fm-dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ---- Dialog Title ---- */
+.dialog-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dialog-subtitle {
+  font-size: 12px;
+  font-family: var(--fm-font-mono);
+  color: var(--fm-fg);
+  opacity: 0.7;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--fm-border);
+  word-break: break-all;
+}
+
+/* ---- Permission Grid ---- */
+.permission-grid {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  gap: 4px 12px;
+  margin-bottom: 14px;
+  align-items: center;
+}
+
+.permission-grid-header {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 4px;
+  color: var(--fm-fg);
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.permission-grid-row {
+  display: contents;
+}
+
+.permission-grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+}
+
+.permission-label {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: right;
+  padding-right: 4px;
+}
+
+/* ---- Permission Checkbox ---- */
+.permission-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--fm-btn-bg);
+  margin: 0;
+}
+
+.permission-checkbox:focus-visible {
+  outline: 2px solid var(--fm-input-focus-border);
+  outline-offset: 1px;
+}
+
+/* ---- Octal Row ---- */
+.permission-octal-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--fm-border);
+}
+
+.permission-octal-row label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.permission-octal-value {
+  width: 64px;
+  height: var(--fm-control-height);
+  font-family: var(--fm-font-mono);
+  font-size: 13px;
+  text-align: center;
+  letter-spacing: 2px;
+  background: var(--fm-input-bg, #1e1e1e);
+  color: var(--fm-input-fg, #d4d4d4);
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  outline: none;
+  padding: 0 4px;
+}
+
+.permission-octal-value:focus {
+  border-color: var(--fm-input-focus-border, #007acc);
+}
+
+.permission-symbolic {
+  font-family: var(--fm-font-mono);
+  font-size: 12px;
+  color: var(--fm-fg);
+  opacity: 0.75;
+  letter-spacing: 1px;
+}
+
+/* ---- Dialog Buttons ---- */
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.dialog-btn {
+  height: var(--fm-control-height);
+  min-width: 70px;
+  padding: 0 14px;
+  border: 1px solid var(--fm-border);
+  border-radius: var(--fm-radius);
+  background: var(--fm-btn-secondary-bg);
+  color: var(--fm-btn-secondary-fg);
+  font-size: var(--fm-font-size);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-btn:hover {
+  background: var(--fm-btn-secondary-hover);
+}
+
+.dialog-btn-primary {
+  background: var(--fm-btn-bg);
+  color: var(--fm-btn-fg);
+  border-color: var(--fm-btn-bg);
+}
+
+.dialog-btn-primary:hover {
+  background: var(--fm-btn-hover-bg);
+}
