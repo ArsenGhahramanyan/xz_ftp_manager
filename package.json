@@ -361,6 +361,7 @@
     "lint": "eslint src webview/src --ext .ts",
     "pretest": "tsc -p tsconfig.test.json",
     "test": "cd out-test/test && node --test",
+    "prepackage": "node -e \"require('fs').mkdirSync('vsix', { recursive: true })\"",
     "package": "vsce package --out vsix/"
   },
   "dependencies": {
