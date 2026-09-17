@@ -360,7 +360,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p webview/tsconfig.json",
     "lint": "eslint src webview/src --ext .ts",
     "pretest": "tsc -p tsconfig.test.json",
-    "test": "node --test \"out-test/test/**/*.test.js\"",
+    "test": "cd out-test/test && node --test",
     "package": "vsce package --out vsix/"
   },
   "dependencies": {
