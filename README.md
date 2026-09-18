@@ -1,5 +1,7 @@
 # xZ FTP Manager
 
+[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/ghahr.ftp-manager?label=marketplace)](https://marketplace.visualstudio.com/items?itemName=ghahr.ftp-manager)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/ghahr.ftp-manager)](https://marketplace.visualstudio.com/items?itemName=ghahr.ftp-manager)
 [![CI](https://github.com/ArsenGhahramanyan/xz_ftp_manager/actions/workflows/ci.yml/badge.svg)](https://github.com/ArsenGhahramanyan/xz_ftp_manager/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-%5E1.90.0-007ACC.svg)](https://code.visualstudio.com/)
@@ -12,11 +14,15 @@ No telemetry, no phone-home: the extension talks only to the servers you configu
 
 ## Install
 
-The extension is not on the Marketplace yet — install it from a VSIX:
+From the Marketplace — search **xZ FTP Manager** in the Extensions view, or run:
 
-1. Download the latest `ftp-manager-<version>.vsix` from the [Releases](https://github.com/ArsenGhahramanyan/xz_ftp_manager/releases) page, or build one yourself (see [Development](#development)).
-2. In VS Code run **Extensions: Install from VSIX…** from the Command Palette and pick the file.
-3. Reload the window. The **xZ FTP Manager** icon appears in the Activity Bar.
+```
+code --install-extension ghahr.ftp-manager
+```
+
+Or from a VSIX: download `ftp-manager-<version>.vsix` from the [Releases](https://github.com/ArsenGhahramanyan/xz_ftp_manager/releases) page (or build one yourself, see [Development](#development)) and run **Extensions: Install from VSIX…** from the Command Palette.
+
+Either way, reload the window afterwards — the **xZ FTP Manager** icon appears in the Activity Bar.
 
 Requires VS Code 1.90 or newer. Node.js 20+ is needed only to build from source.
 
